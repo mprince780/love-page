@@ -3,6 +3,9 @@
 <head>
 
 <!-- WhatsApp / Social Preview -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ff4d88">
+
 <meta property="og:title" content="For My Love ❤️">
 <meta property="og:description" content="I made something special for you 💖">
 <meta property="og:image" content="https://raw.githubusercontent.com/mprince780/love-page/main/16-43-26-218_512.webp">
@@ -240,7 +243,10 @@ function yesClick() {
 
   startCelebration();
 }
-
+  
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
 </script>
 
 </body>
