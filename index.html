@@ -36,12 +36,28 @@ img {
   height: 200px;
   border: 4px solid white;
 }
+
+  .heart, .confetti {
+  position: fixed;
+  top: -10px;
+  font-size: 24px;
+  animation: fall linear infinite;
+  z-index: 9999;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
 </style>
 </head>
 
 <body>
 
-<audio autoplay loop>
+<audio id="bgMusic" loop>
+
   <source src="https://raw.githubusercontent.com/mprince780/love-page/main/Ahmed_Jahanzeb_-_Tera_Mera_Hai_Pyar_From_Ishq_Murshid_(mp3.pm).mp3" type="audio/mpeg">
 
 </audio>
@@ -53,12 +69,40 @@ You make my life beautiful 💖<br><br>
 Will you be my Valentine forever? 😘
 </p>
 
+  <br>
+
+<button id="playBtn" onclick="playMusic()" style="
+  padding:10px 20px;
+  border:none;
+  border-radius:20px;
+  background:#ff4d88;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+">
+🎵 Play Our Song
+</button>
+
+
+<br><br>
+
+
 <button id="yes" onclick="yesClick()">Yes 😍</button>
 <button id="no" ontouchstart="moveNo()" onmouseover="moveNo()">No 🙈</button>
 
 <br><br>
  
 <script>
+
+ function playMusic() {
+  const music = document.getElementById("bgMusic");
+  const btn = document.getElementById("playBtn");
+
+  music.play();
+  btn.style.display = "none";
+}
+
+
 function moveNo() {
   let x = Math.random() * (window.innerWidth - 120);
   let y = Math.random() * (window.innerHeight - 80);
@@ -66,6 +110,38 @@ function moveNo() {
   document.getElementById("no").style.left = x + "px";
   document.getElementById("no").style.top = y + "px";
 }
+
+  function startCelebration() {
+
+  // Hearts
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 5000);
+  }, 300);
+
+  // Confetti
+  setInterval(() => {
+    const conf = document.createElement("div");
+    conf.className = "confetti";
+    conf.innerHTML = "🎊";
+
+    conf.style.left = Math.random() * 100 + "vw";
+    conf.style.animationDuration = (2 + Math.random() * 3) + "s";
+
+    document.body.appendChild(conf);
+
+    setTimeout(() => conf.remove(), 5000);
+  }, 400);
+}
+
 
 function yesClick() {
   document.body.innerHTML = `
@@ -77,6 +153,7 @@ function yesClick() {
     <img src="https://raw.githubusercontent.com/mprince780/love-page/main/12400105_7286e.gif" width="250">
 
   `;
+   startCelebration();
 }
 </script>
 
