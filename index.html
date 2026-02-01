@@ -126,7 +126,8 @@ body {
 #no {
   background: #dc3545;
   color: white;
-  position: relative;
+  position: fixed;
+  transition: all 0.4s ease;
 }
 
 /* Hearts + Confetti */
@@ -145,6 +146,23 @@ body {
   }
 }
 
+/* Kisses */
+
+.kiss {
+  position: fixed;
+  bottom: -30px;
+  font-size: 28px;
+  animation: kissFly 4s linear infinite;
+  z-index: 9999;
+}
+
+@keyframes kissFly {
+  to {
+    transform: translateY(-120vh) scale(1.3);
+    opacity: 0;
+  }
+}
+
 </style>
 </head>
 
@@ -160,33 +178,21 @@ body {
 
 <div class="card" id="content">
 
-  <!-- Image -->
-
-  <img  class="profile-img" 
+  <img class="profile-img"
   src="https://raw.githubusercontent.com/mprince780/love-page/main/super-cute-teddy-bears-couple-in-love-happy-valentine-s-day-concept-background-ai-generated-image-photo.jpg">
 
-  <!-- Name -->
-
   <h1 class="glow">Hey ❤️ Seema</h1>
-
-  <!-- Text -->
 
   <div class="section-text">
     You make my life beautiful 💖<br>
     Will you be my Valentine forever? 😘
   </div>
 
-  <!-- Typing -->
-
   <div id="typing"></div>
-
-  <!-- Music -->
 
   <button id="playBtn" class="music-btn" onclick="playMusic()">
     🎵 Play Our Song
   </button>
-
-  <!-- Buttons -->
 
   <div class="btn-group">
     <button id="yes" onclick="yesClick()">Yes 😍</button>
@@ -209,16 +215,35 @@ function playMusic() {
 }
 
 
-/* No Button */
+/* No Button (Smooth + Safe) */
 
 function moveNo() {
 
   const noBtn = document.getElementById("no");
+  const yesBtn = document.getElementById("yes");
 
-  let x = Math.random() * 200 - 100;
-  let y = Math.random() * 200 - 100;
+  const yesRect = yesBtn.getBoundingClientRect();
+  const safeMargin = 90;
 
-  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+  let x, y, tries = 0;
+
+  do {
+
+    x = Math.random() * (window.innerWidth - 150);
+    y = Math.random() * (window.innerHeight - 150);
+
+    tries++;
+
+    var tooClose =
+      x > yesRect.left - safeMargin &&
+      x < yesRect.right + safeMargin &&
+      y > yesRect.top - safeMargin &&
+      y < yesRect.bottom + safeMargin;
+
+  } while (tooClose && tries < 50);
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
 }
 
 
@@ -284,6 +309,31 @@ function startCelebration() {
 }
 
 
+/* Kisses */
+
+function startKisses() {
+
+  const kissInterval = setInterval(() => {
+
+    const kiss = document.createElement("div");
+    kiss.className = "kiss";
+    kiss.innerHTML = "💋";
+
+    kiss.style.left = Math.random() * 100 + "vw";
+
+    document.body.appendChild(kiss);
+
+    setTimeout(() => kiss.remove(), 4000);
+
+  }, 500);
+
+
+  setTimeout(() => {
+    clearInterval(kissInterval);
+  }, 15000);
+}
+
+
 /* Yes Click */
 
 function yesClick() {
@@ -297,14 +347,14 @@ function yesClick() {
     <p>You are my forever 💍</p>
 
     <img class="profile-img"
-    src="https://raw.githubusercontent.com/mprince780/love-page/main/16-43-26-218_512.webp" width="220">
+    src="https://raw.githubusercontent.com/mprince780/love-page/main/16-43-26-218_512.webp"><br>
 
-    <img class="profile-img" 
-    src="https://raw.githubusercontent.com/mprince780/love-page/main/12400105_7286e.gif"
+    <img src="https://raw.githubusercontent.com/mprince780/love-page/main/12400105_7286e.gif"
     width="220">
   `;
 
   startCelebration();
+  startKisses();
 }
 
 
