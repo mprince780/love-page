@@ -214,12 +214,37 @@ function playMusic() {
 function moveNo() {
 
   const noBtn = document.getElementById("no");
+  const yesBtn = document.getElementById("yes");
 
-  let x = Math.random() * 200 - 100;
-  let y = Math.random() * 200 - 100;
+  const yesRect = yesBtn.getBoundingClientRect();
 
-  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+  const safeMargin = 80; // distance from Yes button
+
+  let x, y;
+  let tries = 0;
+
+  do {
+
+    x = Math.random() * (window.innerWidth - 150);
+    y = Math.random() * (window.innerHeight - 150);
+
+    tries++;
+
+    // Check distance from Yes
+    var tooClose =
+      x > yesRect.left - safeMargin &&
+      x < yesRect.right + safeMargin &&
+      y > yesRect.top - safeMargin &&
+      y < yesRect.bottom + safeMargin;
+
+  } while (tooClose && tries < 50);
+
+
+  noBtn.style.position = "fixed";
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
 }
+
 
 
 /* Typing Effect */
