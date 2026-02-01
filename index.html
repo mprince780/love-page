@@ -1,17 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+
+<!-- WhatsApp / Social Preview -->
+<meta property="og:title" content="For My Love ❤️">
+<meta property="og:description" content="I made something special for you 💖">
+<meta property="og:image" content="https://raw.githubusercontent.com/mprince780/love-page/main/16-43-26-218_512.webp">
+<meta property="og:url" content="https://mprince780.github.io/love-page/">
+
+<meta charset="UTF-8">
+
 <title>For My Love ❤️</title>
 
 <style>
+
 body {
   text-align: center;
-  margin-top: 80px;
+  margin-top: 70px;
   font-family: Arial;
   background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  overflow-x: hidden;
 }
 
-h1 { color: #b30059; }
+/* Glowing Name */
+.glow {
+  font-size: 34px;
+  color: #b30059;
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 5px #ff4d88; }
+  to   { text-shadow: 0 0 20px #ff0055; }
+}
+
 p { font-size: 20px; }
 
 #yes, #no {
@@ -22,7 +44,11 @@ p { font-size: 20px; }
   cursor: pointer;
 }
 
-#yes { background: #28a745; color: white; }
+#yes {
+  background: #28a745;
+  color: white;
+}
+
 #no {
   background: #dc3545;
   color: white;
@@ -37,7 +63,9 @@ img {
   border: 4px solid white;
 }
 
-  .heart, .confetti {
+/* Hearts + Confetti */
+
+.heart, .confetti {
   position: fixed;
   top: -10px;
   font-size: 24px;
@@ -51,25 +79,37 @@ img {
   }
 }
 
+/* Typing Text */
+#typing {
+  font-size: 22px;
+  font-weight: bold;
+  color: #b30059;
+  min-height: 30px;
+}
+
 </style>
 </head>
+
 
 <body>
 
 <audio id="bgMusic" loop>
-
   <source src="https://raw.githubusercontent.com/mprince780/love-page/main/Ahmed_Jahanzeb_-_Tera_Mera_Hai_Pyar_From_Ishq_Murshid_(mp3.pm).mp3" type="audio/mpeg">
-
 </audio>
 
-<h1>Hey ❤️ Seema</h1>
+
+<div id="content">
+
+<h1 class="glow">Hey ❤️ Seema</h1>
 
 <p>
 You make my life beautiful 💖<br><br>
 Will you be my Valentine forever? 😘
 </p>
 
-  <br>
+<div id="typing"></div>
+
+<br>
 
 <button id="playBtn" onclick="playMusic()" style="
   padding:10px 20px;
@@ -83,18 +123,21 @@ Will you be my Valentine forever? 😘
 🎵 Play Our Song
 </button>
 
-
 <br><br>
-
 
 <button id="yes" onclick="yesClick()">Yes 😍</button>
 <button id="no" ontouchstart="moveNo()" onmouseover="moveNo()">No 🙈</button>
 
 <br><br>
- 
+
+</div>
+
+
 <script>
 
- function playMusic() {
+/* Music */
+
+function playMusic() {
   const music = document.getElementById("bgMusic");
   const btn = document.getElementById("playBtn");
 
@@ -103,7 +146,10 @@ Will you be my Valentine forever? 😘
 }
 
 
+/* No Button */
+
 function moveNo() {
+
   let x = Math.random() * (window.innerWidth - 120);
   let y = Math.random() * (window.innerHeight - 80);
 
@@ -111,10 +157,30 @@ function moveNo() {
   document.getElementById("no").style.top = y + "px";
 }
 
-  function startCelebration() {
 
-  // Hearts
-  setInterval(() => {
+/* Typing Effect */
+
+const text = "I Love You So Much ❤️";
+let index = 0;
+
+function typeText() {
+
+  if (index < text.length) {
+    document.getElementById("typing").innerHTML += text.charAt(index);
+    index++;
+    setTimeout(typeText, 120);
+  }
+}
+
+typeText();
+
+
+/* Celebration */
+
+function startCelebration() {
+
+  const heartInterval = setInterval(() => {
+
     const heart = document.createElement("div");
     heart.className = "heart";
     heart.innerHTML = "❤️";
@@ -125,10 +191,12 @@ function moveNo() {
     document.body.appendChild(heart);
 
     setTimeout(() => heart.remove(), 5000);
+
   }, 300);
 
-  // Confetti
-  setInterval(() => {
+
+  const confettiInterval = setInterval(() => {
+
     const conf = document.createElement("div");
     conf.className = "confetti";
     conf.innerHTML = "🎊";
@@ -139,22 +207,39 @@ function moveNo() {
     document.body.appendChild(conf);
 
     setTimeout(() => conf.remove(), 5000);
+
   }, 400);
+
+
+  // Stop after 15 sec
+  setTimeout(() => {
+
+    clearInterval(heartInterval);
+    clearInterval(confettiInterval);
+
+  }, 15000);
 }
 
+
+/* Yes Click */
 
 function yesClick() {
-  document.body.innerHTML = `
-    <h1>Yayyy 🎉❤️</h1>
-    <h2>I Love You 😘</h2>
-    <p>You are my forever 💍</p>
-  
-    <img src="https://raw.githubusercontent.com/mprince780/love-page/main/16-43-26-218_512.webp" width="250">
-    <img src="https://raw.githubusercontent.com/mprince780/love-page/main/12400105_7286e.gif" width="250">
 
+  document.getElementById("content").innerHTML = `
+    <h1 class="glow">Yayyy 🎉❤️</h1>
+
+    <h2>I Love You 😘</h2>
+
+    <p>You are my forever 💍</p>
+
+    <img src="https://raw.githubusercontent.com/mprince780/love-page/main/16-43-26-218_512.webp" width="230"><br><br>
+
+    <img src="https://raw.githubusercontent.com/mprince780/love-page/main/12400105_7286e.gif" width="230">
   `;
-   startCelebration();
+
+  startCelebration();
 }
+
 </script>
 
 </body>
