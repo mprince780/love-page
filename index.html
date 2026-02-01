@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For My Love ❤️</title>
+
+<style>
+body {
+  text-align: center;
+  margin-top: 80px;
+  font-family: Arial;
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+}
+
+h1 { color: #b30059; }
+p { font-size: 20px; }
+
+#yes, #no {
+  padding: 12px 28px;
+  font-size: 18px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+#yes { background: #28a745; color: white; }
+#no {
+  background: #dc3545;
+  color: white;
+  position: absolute;
+}
+
+img {
+  margin-top: 20px;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  border: 4px solid white;
+}
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+  <source src="SONG_LINK_HERE.mp3" type="audio/mpeg">
+</audio>
+
+<h1>Hey ❤️ Seema</h1>
+
+<p>
+You make my life beautiful 💖<br><br>
+Will you be my Valentine forever? 😘
+</p>
+
+<button id="yes" onclick="yesClick()">Yes 😍</button>
+<button id="no" onmouseover="moveNo()">No 🙈</button>
+
+<br><br>
+
+<img src="https://ibb.co/xtLRnd6F">
+<img src="https://ibb.co/B21bzqVw">
+
+<script>
+function moveNo() {
+  let x = Math.random() * (window.innerWidth - 120);
+  let y = Math.random() * (window.innerHeight - 80);
+
+  document.getElementById("no").style.left = x + "px";
+  document.getElementById("no").style.top = y + "px";
+}
+
+function yesClick() {
+  document.body.innerHTML = `
+    <h1>Yayyy 🎉❤️</h1>
+    <h2>I Love You 😘</h2>
+    <p>You are my forever 💍</p>
+    <img src="https://ibb.co/B21bzqVw" width="250">
+    <img src="https://ibb.co/xtLRnd6F" width="250">
+  `;
+}
+</script>
+
+</body>
+</html>
